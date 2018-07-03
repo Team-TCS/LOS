@@ -53,11 +53,9 @@ public class NewApplicationServlet extends HttpServlet
 		// store it in Customer class
 		
 		Customer customer=new Customer(first_name, last_name, gender, address, phn, email, aadhar_card, pan_card, income);
-		out.println("222");
 		
 		//call insert method
 		
 		customerutil.insert(customer);	
-		out.println("333");
 	}
 }

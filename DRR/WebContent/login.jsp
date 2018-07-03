@@ -26,7 +26,8 @@
     </head>
     <body>
     
-
+<h2>${msg1}</h2>
+<h2>${msg}</h2>
 <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
 <div class="container">
     <div class="row vertical-offset-100">
@@ -36,13 +37,13 @@
 			    	<h3 class="panel-title">Please sign in</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8"  method="post" action="">
+			    	<form accept-charset="UTF-8"  method="post" action="EmployeeLoginServlet">
                     <fieldset>
 			    	  	<div class="form-group">
-			    		    <input class="form-control"  name="email" type="text">
+			    		    <input class="form-control"  name="employee_name" placeholder="Username" type="text">
 			    		</div>
 			    		<div class="form-group">
-			    			<input class="form-control"  name="password" type="password" value="">
+			    			<input class="form-control"  name="employee_password" placeholder="password" type="password" value="">
 			    		</div>
 			    		<div class="checkbox">
 			    	    	<label>
