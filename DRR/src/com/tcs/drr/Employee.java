@@ -6,6 +6,11 @@ int id;
 String employee_name;
 String employee_password;
 
+public Employee(int id, String employee_name) {
+	this.id = id;
+	this.employee_name = employee_name;
+}
+
 public Employee(String employee_name, String employee_password) 
 {
 	this.employee_name = employee_name;

@@ -1,78 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>LOGIN</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-     <style>
-      body{
-    background-color: grey ;
-	
-    }
 
-.vertical-offset-100{
-    padding-top:100px;
-}
-     </style>
-    </head>
-    <body>
-    
-<h2>${msg1}</h2>
-<h2>${msg}</h2>
-<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
-<div class="container">
-    <div class="row vertical-offset-100">
-    	<div class="col-md-4 col-md-offset-4">
-    		<div class="panel panel-default">
-			  	<div class="panel-heading">
-			    	<h3 class="panel-title">Please sign in</h3>
-			 	</div>
-			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8"  method="post" action="EmployeeLoginServlet">
-                    <fieldset>
-			    	  	<div class="form-group">
-			    		    <input class="form-control"  name="employee_name" placeholder="Username" type="text">
-			    		</div>
-			    		<div class="form-group">
-			    			<input class="form-control"  name="employee_password" placeholder="password" type="password" value="">
-			    		</div>
-			    		<div class="checkbox">
-			    	    	<label>
-			    	    		<input name="remember" type="checkbox" value="Remember Me"> Remember Me
-			    	    	</label>
-			    	    </div>
-			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Login" onclick="return check(this.form)">
-			    	</fieldset>
-			      	</form>
-			    </div>
-			</div>
-		</div>
-	</div>
-</div>
-<script language="javascript">
-function check(form)
-{
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="assets/css/Google-Style-Login.css">
+    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
 
-if(form.userid.value == "ads" && form.pwd.value == "ads")
-{
-	return true;
-}
-else
-{
-	alert("Error Password or Username")
-	return false;
-}
-}
-</script>
+<body>
+    <div></div>
+    <div>
+       <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header"><a href="#" class="navbar-brand">DRR-Demand Receive Return</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
+        <div
+            class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li role="presentation"><a href="adminLogin.jsp">Admin Login</a></li>
+            </ul>
+    </div>
+    </div>
+</nav>
+    </div>
+    <h2 class="text-center text-muted">Employee Login</h2>
+    <div class="login-card"><img src="assets/img/avatar_2x.png" class="profile-img-card">
+        <p class="profile-name-card"> </p>
+        <form class="form-signin" method="post" action="EmployeeLoginServlet"><span class="reauth-email"> </span><input class="form-control" type="text" required placeholder="Username" id="inputEmail" name="employee_name"><input class="form-control" type="password" required name="employee_password" placeholder="Password" id="inputPassword">
+		<button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Sign in</button>
+		<div>${msg1}</div>
+		<div>${msg}</div>
+		</form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
 
-    </body>
-    </html>
+</html>

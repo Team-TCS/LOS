@@ -19,7 +19,7 @@ public class EmployeeLoginServlet extends HttpServlet
 	@Resource(name="jdbc/customer-tracker")
 	DataSource datasource;
 	EmployeeUtil employeeutil;
-	//pass datasource to customerutil class 
+	//pass datasource to EmployeeUtil class 
 	@Override
 	public void init() throws ServletException 
 	{
@@ -47,7 +47,8 @@ public class EmployeeLoginServlet extends HttpServlet
 		Employee employee=new Employee(employee_name, employee_password);
 		
 		//check for login
-		
+		try
+		{
 		boolean valid=employeeutil.login(employee);
 		if(!valid)
 		{
@@ -65,7 +66,10 @@ public class EmployeeLoginServlet extends HttpServlet
 	          session.setAttribute("currentSessionUser",employee); 
 	          response.sendRedirect("application.jsp"); //logged-in page   
 		}
-			
-	}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 
-}
+}}
