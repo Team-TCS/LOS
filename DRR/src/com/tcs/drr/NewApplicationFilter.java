@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 @WebFilter("/NewApplicationServlet")
 public class NewApplicationFilter implements Filter 
@@ -19,8 +20,9 @@ public class NewApplicationFilter implements Filter
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
 	{
-		//take input
-		
+		 HttpServletRequest httpRequest = (HttpServletRequest) request;
+		if(httpRequest.getMethod().equalsIgnoreCase("POST"))
+		{
 		String phn=request.getParameter("phn");
 		String email=request.getParameter("email");
 		String aadhar_card=request.getParameter("aadhar_card");
@@ -54,9 +56,16 @@ public class NewApplicationFilter implements Filter
 		
 		 if(!validate.isValidPhn(phn) || !validate.isValidEmail(email) || !validate.validateAadharNumber(aadhar_card) || !validate.isValidPan(pan_card))
 		 {
+			 if(request.getParameter("command").equals("EDIT"))
+				 request.getRequestDispatcher("/CustomerEdit.jsp").forward(request, response);
+			 else
 			 request.getRequestDispatcher("/application.jsp").forward(request, response);
 		 }
-		 
+		 else
+		 {
+		    chain.doFilter(request, response);
+	     }
+		}
 		 else
 		 {
 		    chain.doFilter(request, response);

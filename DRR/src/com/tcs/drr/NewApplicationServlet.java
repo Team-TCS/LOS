@@ -1,7 +1,7 @@
 package com.tcs.drr;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 @WebServlet("/NewApplicationServlet")
@@ -36,9 +37,8 @@ public class NewApplicationServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		response.setContentType("text/html");
-	    PrintWriter out=response.getWriter();
-		//take user input
-		
+	    		//take user input
+		String cmd=request.getParameter("command");
 		String first_name=request.getParameter("first_name");
 		String last_name=request.getParameter("last_name");
 		String gender=request.getParameter("gender");
@@ -48,14 +48,91 @@ public class NewApplicationServlet extends HttpServlet
 		String aadhar_card=request.getParameter("aadhar_card");
 		String pan_card=request.getParameter("pan_card");
 		String income=request.getParameter("income");
-		out.println("income"+income);
-		
-		// store it in Customer class
-		
+		try
+		{
+		if(cmd.equals("EDIT"))
+				{
+					String id=request.getParameter("id");
+					int customer_id=Integer.parseInt(id);
+					Customer customer_new=new Customer(customer_id,first_name, last_name, gender, address, phn, email, aadhar_card, pan_card, income);
+					customerutil.edit(customer_new);
+					listcustomer(request,response);
+				}
+		else
+		{
 		Customer customer=new Customer(first_name, last_name, gender, address, phn, email, aadhar_card, pan_card, income);
 		
 		//call insert method
 		
 		customerutil.insert(customer);	
+		}}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		String cmd=request.getParameter("command");
+		switch(cmd)
+		{
+		case "LIST":
+			listcustomer(request,response);
+		case "DELETE":
+			deletecustomer(request,response);
+		case "LOAD":
+			loadcustomer(request,response);
+		}
+	}
+
+	private void loadcustomer(HttpServletRequest request, HttpServletResponse response) 
+	{
+		try
+		{
+			HttpSession session=request.getSession(false);
+		String id=request.getParameter("id");
+		Customer customer=customerutil.read(id);
+		session.setAttribute("customer", customer);
+		request.getRequestDispatcher("/CustomerEdit.jsp").forward(request, response);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void deletecustomer(HttpServletRequest request, HttpServletResponse response) 
+	{
+		try
+		{
+		String id=request.getParameter("id");
+		customerutil.delete(id);
+		listcustomer(request,response);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void listcustomer(HttpServletRequest request, HttpServletResponse response) 
+	{
+		try
+		{
+		List<Customer> list=customerutil.getCustomer();
+		request.setAttribute("Customers",list);
+		request.getRequestDispatcher("/CustomerDetails.jsp").forward(request, response);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 }

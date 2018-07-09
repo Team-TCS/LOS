@@ -16,7 +16,7 @@
     <div class="logo"><a href="#" class="simple-text">Details</a></div>
     <ul class="nav">
         <li class="active"><a href="AddEmployeeServlet?command=ADD"><i class="glyphicon glyphicon-user"></i><p>Employee details</p></a></li>
-        <li><a href="#"><i class="glyphicon glyphicon-user"></i><p>Customer Details</p></a></li>
+        <li><a href="NewApplicationServlet?command=LIST"><i class="glyphicon glyphicon-user"></i><p>Customer Details</p></a></li>
     </ul>
 </div></div>
         <div class="main-panel">

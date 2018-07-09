@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter({"/AdminDashboard.jsp","/AddEmployeeServlet","/EmployeeDetails.jsp"})
+@WebFilter({"/AdminDashboard.jsp","/AddEmployeeServlet","/EmployeeDetails.jsp","/CustomerDetails.jsp","/CustomerEdit.jsp"})
 public class AdminLoginFilter implements Filter {
 
 	public void destroy() {

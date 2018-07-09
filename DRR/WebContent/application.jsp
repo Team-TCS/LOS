@@ -214,6 +214,7 @@
         <h1>New Application</h1> 
         <p>Basic Detail</p> 
         <form  name="RegForm" action="NewApplicationServlet" method="post" onsubmit="return validateForm()" class="form-inline">
+             <input type="hidden" name="command" value="INSERT">
              <div class="form-group">
                   <label for="FName">First Name:</label>
                   <input type="text" class="form-control" id="FName" name="first_name" value="${param.first_name}" required>
