@@ -16,11 +16,11 @@
          {
         	 var email = document.forms["RegForm"]["email"].value;
         	 var phn = document.getElementById("phone").value;
-        	 alert(!isNaN(phn));
+        	 
         	 var aad = document.forms["RegForm"]["aadhar"].value;
         	 var pan = document.forms["RegForm"]["pan"].value;
         	 var ann = document.forms["RegForm"]["income"].value;
-        	 alert(!isNaN(phn));
+        	 
         	    if(isNaN(phn))
         	    {
             	    
@@ -61,15 +61,31 @@
         }
 </script>
     <style>
+    .field, .actions {
+    margin-bottom: 15px;
+  }
+  .field label {
+    float: left;
+    width: 45%;
+    text-align: right;
+    padding-right: 0px;
+    margin: 0px 0px 0px 0px;
+  }
+  .field input {
+    width: 0%;
+    margin: 0px;
+  }
      body 
       {
           font: 400 15px Lato, sans-serif;
           line-height: 1.8;
-          color: #818181;
+          color: black;
+          font-color:black;
       }
       .jumbotron
       {
-          background-color: #f4511e;
+      
+          background-color: powderblue;
           color: #fff;
           padding: 100px 25px;
           font-family: Montserrat, sans-serif;
@@ -85,7 +101,7 @@
       .navbar 
       {
           margin-bottom: 0;
-          background-color: #f4511e;
+          background-color: powderblue;
           z-index: 9999;
           border: 0;
          font-size: 14px;
@@ -101,7 +117,7 @@
 
      .navbar-nav li a:hover, .navbar-nav li.active a 
      {
-        color: #f4511e;
+        color: powderblue;
        background-color: #fff;
      }
      .navbar-default .navbar-toggle 
@@ -127,12 +143,12 @@
      }
      .logo-small 
      {
-         color: #f4511e;
+         color:powderblue;
         font-size: 50px;
      }
      .logo
       {
-        color: #f4511e;
+        color: powderblue;
         font-size: 200px;
       }
       h2 
@@ -152,6 +168,10 @@
          margin-bottom: 30px;
       }  
       p
+      {
+        color: #303030;
+      }
+      label
       {
         color: #303030;
       }
@@ -211,27 +231,33 @@
         </div>
       </nav>      
     <div class="jumbotron text-center" id="home">
-        <h1>New Application</h1> 
-        <p>Basic Detail</p> 
+        <h1 style="color:#303030">New Application</h1> 
+        <p>Basic Detail</p>
+        <div class="container form-center"> 
         <form  name="RegForm" action="NewApplicationServlet" method="post" onsubmit="return validateForm()" class="form-inline">
-             <input type="hidden" name="command" value="INSERT">
-             <div class="form-group">
-                  <label for="FName">First Name:</label>
-                  <input type="text" class="form-control" id="FName" name="first_name" value="${param.first_name}" required>
-             </div>
-             <br>
-             <br>
-             <div class="form-group">
+        
+             <input type="hidden" name="command" value="INSERT"> 
+
+			<table class="form-group">
+				<tr>
+                  <td><label for="FName" class="control-label">First Name:</label></td>
+                  <td><input type="text" class="form-control" id="FName" name="first_name" value="${param.first_name}" required></td>
+                </tr>
+
+				<tr>
+                  <td>
                   <label for="LName">Last name:</label>
-                  <input type="text" class="form-control" id="LName" required value="${param.last_name}" name="last_name">
-            </div>
+                  </td>
+                  <td><input type="text" class="form-control" id="LName" required value="${param.last_name}" name="last_name"></td>
+                  </tr>
+            </table>
             <br>
             <br>
              <div class="form-group">
                   <label for="gender">Gender.:</label>
-                  <input type="radio" name="gender" value="M" > Male
-                  <input type="radio" name="gender" value="F"> Female
-                  <input type="radio" name="gender" value="O"> Other
+                  <input type="radio" name="gender" value="M" style="color:#303030" ><b> Male</b>
+                  <input type="radio" name="gender" value="F" style="color:#303030"><b> Female</b>
+                  <input type="radio" name="gender" value="O" style="color:#303030"> <b>Other</b>
              </div>
              <br>
              <br>
@@ -282,8 +308,9 @@
              </div>
              <br>
              <br>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default"><b>Submit</b></button>
         </form>
+        </div>
         <br>
         <br>
         <br>
@@ -310,7 +337,7 @@
           <c:out value="${sessionScope.currentSessionUser.employee_name}"></c:out>
            </h2>
               <form method="post" action="EmployeeLogoutServlet">
-              <button type="submit" class="btn btn-default">Logout</button>
+              <button type="submit" class="btn btn-default"><b>Logout</b></button>
               </form>
           </div>
           <script>

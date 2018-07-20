@@ -64,12 +64,57 @@ public class NewApplicationServlet extends HttpServlet
 		
 		//call insert method
 		
-		customerutil.insert(customer);	
+		customerutil.insert(customer);
+		
+		//Auto Loan
+		autoLoan(customer,request,response);
 		}}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+	}
+
+	private void autoLoan(Customer customer, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		int maxTenure[]= {1,2,3,4,5,6,7};
+		int id=0;
+		int income=Integer.parseInt(customer.getIncome());
+		int maxLoan=0;
+		double interest=0.0;
+		String email=customer.getEmail();
+		if(income>=300000)
+		{
+			maxLoan=4*income;
+			if(customer.getGender().equals("M"))
+			{
+				interest=9.30;
+			}
+			else
+			{
+				interest=9.25;
+			}
+			try
+			{
+			id=customerutil.getCustomerId(customer.getAadhar_card());
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			HttpSession oldSession = request.getSession(false);
+			oldSession.setAttribute("email",email);
+			oldSession.setAttribute("customer_id",id);
+			oldSession.setAttribute("maxTenure",maxTenure);
+			oldSession.setAttribute("maxLoan",maxLoan);
+			oldSession.setAttribute("interest",interest);
+			response.sendRedirect("loandetail.jsp");
+		}
+		else
+		{
+			
+		}
+		
 	}
 
 	@Override

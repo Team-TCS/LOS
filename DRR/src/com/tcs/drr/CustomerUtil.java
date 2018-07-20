@@ -200,4 +200,32 @@ public void edit(Customer customer_new) throws Exception
 	     close(conn,stmt,null);
 	    }
 	
+}
+
+public int getCustomerId(String aadhar_card) throws Exception
+{
+	Connection conn=null;
+	Statement stmt=null;
+	ResultSet rs=null;
+	int id=0;
+	
+	//connect to database
+	try
+	{
+		conn=datasource.getConnection();
+		stmt=conn.createStatement();
+		
+		String sql=   "select id from customer where aadhar_card='"+aadhar_card+"'";
+		rs=stmt.executeQuery(sql);
+		while(rs.next())
+		{
+			id=rs.getInt("id");
+			break;
+		}
+	    return id;
+	}
+	finally 
+    {
+     close(conn,stmt,null);
+    }			
 }}
