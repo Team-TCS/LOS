@@ -84,24 +84,22 @@ body{background-color: grey;}
           <h1>AUTO</h1>
         </div>
         <div class="panel-body">
-             <form  name="AutoForm" action="LoanServlet" method="post" onsubmit="" class="form-inline">
+             <form  name="AutoForm" action="LoanServlet" method="post" onsubmit="" class="form-horizontal">
              <input type=hidden name="id" value="${customer_id}">
              <input type=hidden name="email" value="${email}">
              <input type=hidden name="tol" value="auto">
-             <div class="form-group">
+             
                   <label for="date">first payement date</label>
+              <div class="form-group">
                   <input type="date" class="form-control" id="date" name="date" value="" required>
              </div>
-             <br>
-             <br>
-         
-             <div class="form-group">
+ 
+             
                   <label for="loan">Loan Amount:</label>
+             <div class="form-group">
                   <input type="number" class="form-control" id="amount" name="loan_amount" min=0 max="${maxLoan}" value="${maxLoan}" required>
              </div>
-             <br>
-             <br>
-    
+
             <div class="form-group">
                   <label for="interest">Interest Rate:</label>
                   <input type="decimal" class="form-control" id="interest" name="interest" value="${interest}" readonly required>
@@ -125,7 +123,7 @@ body{background-color: grey;}
           <h1>HOME</h1>
         </div>
         <div class="panel-body">
-             <form  name="HomeForm" action="LoanServlet" method="post" onsubmit="" class="form-inline">
+             <form  name="HomeForm" action="LoanServlet" method="post" onsubmit="" class="form-horizontal">
              <input type=hidden name="id" value="${customer_id2}">
              <input type=hidden name="email" value="${email2}">
              <input type=hidden name="tol" value="home">
@@ -133,16 +131,12 @@ body{background-color: grey;}
                   <label for="date">first payement date</label>
                   <input type="date" class="form-control" id="date" name="date" value="" required>
              </div>
-             <br>
-             <br>
-         
+
              <div class="form-group">
                   <label for="loan">Loan Amount:</label>
                   <input type="number" class="form-control" id="amount" name="loan_amount" min=0 max="${maxLoan2}" value="${maxLoan2}" required>
              </div>
-             <br>
-             <br>
-    
+
             <div class="form-group">
                   <label for="interest">Interest Rate:</label>
                   <input type="decimal" class="form-control" id="interest" name="interest" value="${interest2}" readonly required>
