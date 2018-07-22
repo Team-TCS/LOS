@@ -1,1 +1,1 @@
-Demand-Receive_Return : I is a Loan Oigination System 
+Demand-Receive_Return : It is a Loan Oigination System 
