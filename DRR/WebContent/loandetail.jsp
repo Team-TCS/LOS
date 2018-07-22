@@ -125,28 +125,39 @@ body{background-color: grey;}
           <h1>HOME</h1>
         </div>
         <div class="panel-body">
-          <p><form  name="HomeForm" action="" method="post" onsubmit="" class="form-inline">
+             <form  name="HomeForm" action="LoanServlet" method="post" onsubmit="" class="form-inline">
+             <input type=hidden name="id" value="${customer_id2}">
+             <input type=hidden name="email" value="${email2}">
+             <input type=hidden name="tol" value="home">
              <div class="form-group">
                   <label for="date">first payement date</label>
                   <input type="date" class="form-control" id="date" name="date" value="" required>
              </div>
              <br>
+             <br>
+         
              <div class="form-group">
                   <label for="loan">Loan Amount:</label>
-                  <input type="number" class="form-control" id="amount" name="amount" value="" required>
+                  <input type="number" class="form-control" id="amount" name="loan_amount" min=0 max="${maxLoan2}" value="${maxLoan2}" required>
              </div>
+             <br>
              <br>
     
             <div class="form-group">
                   <label for="interest">Interest Rate:</label>
-                  <input type="decimal" class="form-control" id="interest" name="interest" value="" required>
-             </div></p>
+                  <input type="decimal" class="form-control" id="interest" name="interest" value="${interest2}" readonly required>
+             </div>
         </div>
-        <div class="panel-footer">
-          <label for="month">no. of months:</label>
-                  <input type="number"  id="month">
-          <button class="btn btn-lg">Next</button>
+  		<div class="panel-footer">
+          <label for="years">Tenure in years:</label>
+                  <select name="tenure">
+                  <c:forEach var="temp" items="${maxTenure2}">      
+                  <option>${temp}</option>
+                  </c:forEach>      
+				  </select>   
+          <button type="submit" class="btn btn-lg">Next</button>
         </div>
+        </form>
       </div> 
     </div> 
    

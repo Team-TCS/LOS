@@ -27,9 +27,8 @@
                         class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav navbar-left"></ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Change Password</a>          
-                            </li>
-                            <li role="presentation"><a href="#">Logout</a></li>
+                            <li role="presentation"><a href="changepassword.jsp">Change Password</a></li>
+                            <li role="presentation"><a href="AdminLogoutServlet">Logout</a></li>
                         </ul>
                 </div>
         </div>

@@ -108,14 +108,56 @@ public class NewApplicationServlet extends HttpServlet
 			oldSession.setAttribute("maxTenure",maxTenure);
 			oldSession.setAttribute("maxLoan",maxLoan);
 			oldSession.setAttribute("interest",interest);
+			homeLoan(customer,request,response);
+		}
+		else
+		{
+			request.setAttribute("msg0","The person is not eligible");
+			request.getRequestDispatcher("/application.jsp").forward(request,response);
+		}
+		
+	}
+	private void homeLoan(Customer customer, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		int maxTenure[]= new int[30];
+		for(int i=1;i<=30;i++)
+			maxTenure[i-1]=i;	
+		int id=0;
+		int income=Integer.parseInt(customer.getIncome());
+		int maxLoan=0;
+		double interest=0.0;
+		String email=customer.getEmail();
+		if(income>=300000)
+		{
+			maxLoan=7*income;
+			if(customer.getGender().equals("M"))
+			{
+				interest=8.35;
+			}
+			else
+			{
+				interest=8.30;
+			}
+			try
+			{
+			id=customerutil.getCustomerId(customer.getAadhar_card());
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			HttpSession oldSession = request.getSession(false);
+			oldSession.setAttribute("email2",email);
+			oldSession.setAttribute("customer_id2",id);
+			oldSession.setAttribute("maxTenure2",maxTenure);
+			oldSession.setAttribute("maxLoan2",maxLoan);
+			oldSession.setAttribute("interest2",interest);
 			response.sendRedirect("loandetail.jsp");
 		}
 		else
 		{
 			
-		}
-		
-	}
+		}}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

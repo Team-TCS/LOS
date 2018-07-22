@@ -27,6 +27,7 @@ public class NewApplicationFilter implements Filter
 		String email=request.getParameter("email");
 		String aadhar_card=request.getParameter("aadhar_card");
 		String pan_card=request.getParameter("pan_card");
+		@SuppressWarnings("unused")
 		String income=request.getParameter("income");
 		
 		//perform phn validation	

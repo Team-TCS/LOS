@@ -41,6 +41,10 @@
                   <tbody>
                   		<c:forEach var="temp" items="${Customers}">
                   		
+                  		<c:url var="infolink" value="LoanServlet">
+                  		<c:param name="id" value="${temp.id}"></c:param>
+                  		</c:url>
+                  		
                   		<c:url var="updatelink" value="NewApplicationServlet">
                   		<c:param name="command" value="LOAD"></c:param>
                   		<c:param name="id" value="${temp.id}"></c:param>
@@ -53,13 +57,14 @@
                   		
                           <tr>
                             <td style='white-space: nowrap'>
+                              <a class="btn btn-default" href="${infolink}"><i class="fa fa-info-circle"></i></a>
                               <a class="btn btn-default" href="${updatelink}"><em class="fa fa-pencil"></em></a>
                               <a class="btn btn-danger" href="${deletelink}" onclick="if(!(confirm('Are you sure you want to delete this customer'))) return false"><em class="fa fa-trash"></em></a>
                             </td>
                             <td class="hidden-xs">${temp.id}</td>
                             <td>${temp.first_name}</td>
                             <td>${temp.last_name}</td>
-                            <td>${temp.address}</td>
+                            <td style='white-space: nowrap'><address>${temp.address}</address></td>
                             <td>${temp.phn}</td>
                             <td>${temp.email}</td>
                             <td>${temp.aadhar_card}</td>

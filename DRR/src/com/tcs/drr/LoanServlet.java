@@ -68,11 +68,92 @@ public class LoanServlet extends HttpServlet {
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}	
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		String id=request.getParameter("id");
+		try
+		{
+		Loan loan=loanutil.read(id);
+		CustomerUtil customerutil=new CustomerUtil(datasource);
+		Customer customer=customerutil.read(id);
+		auto_loan(loan,customer,request,response);
 		}
-			
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		
 	}
-	private void auto_loan(Loan loan, String email, HttpServletRequest request, HttpServletResponse response) throws Exception
+	private void auto_loan(Loan loan, Customer customer, HttpServletRequest request, HttpServletResponse response) throws Exception
+	{
+		ArrayList<LoanDetail> details=new ArrayList<>();
+		double interest;
+        if(loan.getTol().equals("auto"))
+        {
+        	if(customer.getGender().equals("M"))
+			{
+				interest=9.30;
+			}
+			else
+			{
+				interest=9.25;
+			}
+        }
+        else
+        {
+        	if(customer.getGender().equals("M"))
+			{
+				interest=8.35;
+			}
+			else
+			{
+				interest=8.30;
+			}
+        }
+        interest=interest/1200;
+        int tenure=loan.getTenure()*12;
+        double p=loan.getAmount();
+        //EMI
+        double emi=(p*interest*(Math.pow((1+interest),tenure)))/((Math.pow(1+interest,tenure))-1);
+        //dates
+		String date=loan.getDate();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = sdf.parse(date);
+		Calendar c = Calendar.getInstance();
+		for(int i=1;i<=tenure;i++)
+		{
+		LoanDetail ld=new LoanDetail();
+		c.setTime(startDate);
+		if(i>1)
+		c.add(Calendar.DAY_OF_MONTH, 30);
+		SimpleDateFormat sdf2= new SimpleDateFormat("dd/MM/yyyy");
+		String output = sdf2.format(c.getTime());
+		ld.setDate(output);
+		startDate = sdf2.parse(output);
+		
+		//interest_amount and balance
+			double interest_amount=interest*p;
+			ld.setInterest(interest_amount);
+			p=(p+interest_amount)-emi;
+			if(p<0)
+				p=0;
+			ld.setBalance(p);
+			
+		//store in array list details
+			details.add(ld);
+		}
+		
+		//store everything in session
+		HttpSession oldSession = request.getSession(false);
+		oldSession.setAttribute("emi",emi);
+		oldSession.setAttribute("details",details);
+		response.sendRedirect("repaymentDetail2.jsp");
+	}
+	private void auto_loan(Loan loan, String email,HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		ArrayList<LoanDetail> details=new ArrayList<>();
         double interest=Double.parseDouble(request.getParameter("interest"));
@@ -111,6 +192,9 @@ public class LoanServlet extends HttpServlet {
 		
 		//store everything in session
 		HttpSession oldSession = request.getSession(false);
+		oldSession.setAttribute("email",email);
+		oldSession.setAttribute("tol",loan.getTol());
+		oldSession.setAttribute("amt",loan.getAmount());
 		oldSession.setAttribute("emi",emi);
 		oldSession.setAttribute("details",details);
 		mail(details,emi,email);

@@ -70,6 +70,37 @@ public class LoanUtil
 	      	 e.printStackTrace();
 	      	}
 	}
+
+	public Loan read(String id) throws Exception
+	{
+		int cid=Integer.parseInt(id);
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		Loan loan=null;
+		//connect to database
+		try
+		{
+			conn=datasource.getConnection();
+			stmt=conn.createStatement();
+			
+			String sql=   "select * from loan where id='"+cid+"'";
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				String tol=rs.getString("tol");
+				double amount=rs.getDouble("amount");
+				Date d1 = new Date(rs.getDate("date").getTime());
+				SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd");
+				String date2 = sdf2.format(d1);
+				int tenure=rs.getInt("tenure");
+				loan=new Loan(cid,tol,amount,date2,tenure);
+			}
+			return loan;
+		}
+		finally 
+	    {
+	     close(conn,stmt,null);
+	    }			
 	}
-
-
+}

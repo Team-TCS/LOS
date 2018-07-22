@@ -11,12 +11,12 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class EmployeeLogoutServlet
  */
-@WebServlet("/EmployeeLogoutServlet")
-public class EmployeeLogoutServlet extends HttpServlet {
+@WebServlet("/AdminLogoutServlet")
+public class AdminLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -26,7 +26,7 @@ public class EmployeeLogoutServlet extends HttpServlet {
         {
             session.invalidate();
         }
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("adminLogin.jsp");
 	}
 
 }

@@ -48,6 +48,30 @@ ResultSet rs=null;
      close(conn,stmt,rs);
     }
 }
+public void edit(Employee employee_new) throws Exception 
+{
+	Connection conn=null;	
+	PreparedStatement stmt=null;
+	
+//connect to database
+	try
+	{
+		conn=datasource.getConnection();
+		String sql="update employee "
+					+"set employee_password=? "
+					+"where id=1";
+		
+		stmt=conn.prepareStatement(sql);
+		stmt.setString(1,employee_new.getEmployee_password());
+			
+		stmt.execute();
+	}
+	 finally 
+	    {
+	     close(conn,stmt,null);
+	    }
+	
+}
 
 public void insert(Employee employee)
 {
